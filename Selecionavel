@@ -1,0 +1,23 @@
+from PIL import Image
+import os
+
+local_doc = input(r"Onde está o arquivo?")
+print(local_doc)
+os.chdir(local_doc)
+lista_docs = os.listdir(local_doc)
+
+def numero_docs():
+    x = int(len(lista_docs))
+    return(x)
+
+
+for i in range(0, numero_docs()):
+    print('[', i, ']', lista_docs[i])
+
+selecionar = int(input("Doc à ser convertido: "))
+selecionado = os.listdir(local_doc)[selecionar]
+selecinado_nom = os.path.splitext(selecionado)[selecionar]
+
+imagem = Image.open(local_doc+"\\"+selecionado)
+img = imagem.convert('RGB')
+img.save(local_doc+"\\"+selecinado_nom+".PDF")

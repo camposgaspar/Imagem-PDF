@@ -22,6 +22,7 @@ def numero_docs():
 
 
 for i in range(0, numero_docs()):
+
     selecionado = os.listdir(local_doc)[n]
     extencao = os.path.splitext(selecionado)[1]
     selecionado_nom = os.path.splitext(selecionado)[0]

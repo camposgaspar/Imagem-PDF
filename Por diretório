@@ -1,0 +1,38 @@
+from PIL import Image
+import os
+
+n = 0
+
+local_doc = input(r"Onde está o arquivo?")
+print(local_doc)
+os.chdir(local_doc)
+lista_docs = os.listdir(local_doc)
+print(lista_docs)
+
+def numero_docs():
+    x = int(len(lista_docs))
+    y = x+x
+    return(y)
+
+
+for i in range(0, numero_docs()):
+    print(i)
+    selecionado = os.listdir(local_doc)[n]
+    print("selecionado: "+ str(selecionado))
+    extencao = os.path.splitext(selecionado)[1]
+    print("saber_pdf: "+str(extencao))
+    selecionado_nom = os.path.splitext(selecionado)[0]
+    print("selecionado_nom: "+str(selecionado_nom))
+
+    n += 1
+
+    if ".pdf" in extencao:
+        print("pular")
+        continue
+
+    else:
+        imagem = Image.open(local_doc + "\\" + selecionado)
+        img = imagem.convert('RGB')
+        img.save(local_doc + "\\" + selecionado_nom + "_1" + ".pdf")
+        print(local_doc + "\\" + selecionado_nom + "_1" + ".pdf")
+

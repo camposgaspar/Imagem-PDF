@@ -18,8 +18,7 @@ lista_docs = [x for x in os.listdir(local_doc) if x not in ignorar]
 
 def numero_docs():
     x = int(len(lista_docs))
-    y = x+x
-    return(y)
+    return(x)
 
 
 for i in range(0, numero_docs()):
@@ -27,14 +26,10 @@ for i in range(0, numero_docs()):
     extencao = os.path.splitext(selecionado)[1]
     selecionado_nom = os.path.splitext(selecionado)[0]
 
+    imagem = Image.open(local_doc + "\\" + selecionado)
+    img = imagem.convert('RGB')
+    img.save(local_doc + "\\" + selecionado_nom + ".pdf")
+    print(local_doc + "\\" + selecionado_nom + "_1" + ".pdf")
+    os.rename(local_doc + "\\" + selecionado_nom + ".pdf", destino + "\\" + selecionado_nom + ".pdf")
+
     n += 1
-
-    if ".pdf" in extencao:
-        continue
-
-    else:
-        imagem = Image.open(local_doc + "\\" + selecionado)
-        img = imagem.convert('RGB')
-        img.save(local_doc + "\\" + selecionado_nom + ".pdf")
-        print(local_doc + "\\" + selecionado_nom + "_1" + ".pdf")
-        os.rename(local_doc + "\\" + selecionado_nom + ".pdf", destino + "\\" + selecionado_nom + ".pdf")

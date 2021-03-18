@@ -18,24 +18,27 @@ else:
 
 lista_docs = [x for x in os.listdir(local_doc) if x not in ignorar]
 
+
 def numero_docs():
     x = int(len(lista_docs))
-    return x+1
+    return x + 1
 
 
-for i in range(0, numero_docs()):
-    print(i)
+os.system("msg2pdf -f " + local_doc)
 
-    selecionado = os.listdir(local_doc)[n]
-
-    if selecionado == "MSG":
-        pass
-    else:
-        print(selecionado)
-        msgfile = Path(local_doc, selecionado)
-        print(msgfile)
-        email = Msgtopdf(msgfile)
-        print(email)
-
-        email.email2pdf()
-    n += 1
+# for i in range(0, numero_docs()):
+#     print(i)
+#
+#     selecionado = os.listdir(local_doc)[n]
+#
+#     if selecionado == "MSG":
+#         pass
+#     else:
+#         print(selecionado)
+#         msgfile = Path(local_doc, selecionado)
+#         print(msgfile)
+#         email = Msgtopdf(msgfile)
+#         print(email)
+#
+#         email.email2pdf()
+#     n += 1

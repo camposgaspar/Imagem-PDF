@@ -1,0 +1,41 @@
+from msgtopdf.msgtopdf import Msgtopdf
+from pathlib import Path
+
+import os
+
+n = 0
+ignorar = {"MSG"}
+
+local_doc = input(r"Onde está o arquivo?")
+os.chdir(local_doc)
+
+destino = os.path.join(local_doc, "MSG")
+
+if "MSG" in os.listdir(local_doc):
+    pass
+else:
+    os.makedirs(destino)
+
+lista_docs = [x for x in os.listdir(local_doc) if x not in ignorar]
+
+def numero_docs():
+    x = int(len(lista_docs))
+    return x+1
+
+
+for i in range(0, numero_docs()):
+    print(i)
+
+    selecionado = os.listdir(local_doc)[n]
+
+    if selecionado == "MSG":
+        pass
+    else:
+        print(selecionado)
+        msgfile = Path(local_doc, selecionado)
+        print(msgfile)
+        email = Msgtopdf(msgfile)
+        print(email)
+
+        email.email2pdf()
+    n += 1

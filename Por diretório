@@ -1,9 +1,6 @@
-from msgtopdf.msgtopdf import Msgtopdf
-from pathlib import Path
 import os
 
 n = 0
-ignorar = {"MSG"}
 
 local_doc = input(r"Onde está o arquivo?")
 os.chdir(local_doc)
@@ -23,29 +20,33 @@ for i in range(0, numero_docs()):
 
     os.chdir(local_doc)
     selecionado = os.listdir(local_doc)[n]
-    print(selecionado)
+    print("Documento selecionado: " + selecionado)
     pdf_pasta = local_doc + "\\" + selecionado
-    print(pdf_pasta)
+    print("Pasta do documento: " + pdf_pasta)
 
     if selecionado.endswith('.msg'):
-        print('msg')
+        print('Documento .MSG original.')
+        print('')
         pass
 
     elif selecionado.endswith('.pdf'):
-        print('PDF')
+        print('Documento já presente no destino.')
+        print('')
         pass
 
     else:
         os.chdir(pdf_pasta)
         pdf_sel = pdf_pasta + '\\' + selecionado + '.pdf'
-        print(pdf_sel)
+        print("Documento: " + pdf_sel)
 
         if os.path.exists(pdf_sel):
             os.rename(pdf_sel, local_doc + '\\' + selecionado + ".pdf")
-            print(local_doc + '\\' + selecionado)
+            print("Documento movido para: " + local_doc + '\\' + selecionado)
+            print('')
         else:
             pass
 
     n += 1
 
 ## IMPLEMENTAR Excluir pasta vazia
+## EFICIENCIA!

@@ -1,36 +1,52 @@
-from PIL import Image
+from msgtopdf.msgtopdf import Msgtopdf
+from pathlib import Path
+
 import os
 
+pasta = "a"
 n = 0
-ignorar = {"PDF"}
+ignorar = {"MSG"}
 
 local_doc = input(r"Onde está o arquivo?")
 os.chdir(local_doc)
 
-destino = os.path.join(local_doc, "PDF")
+destino = os.path.join(local_doc, "MSG")
 
-if "PDF" in os.listdir(local_doc):
+if "MSG" in os.listdir(local_doc):
     pass
 else:
     os.makedirs(destino)
 
 lista_docs = [x for x in os.listdir(local_doc) if x not in ignorar]
 
+
 def numero_docs():
     x = int(len(lista_docs))
-    return(x)
+    return x
 
 
-for i in range(0, numero_docs()):
+print(local_doc)
+os.system("msg2pdf -d " + local_doc)
 
+for i in range(0, numero_docs()+10):
+    print(i)
+
+    os.chdir(local_doc)
     selecionado = os.listdir(local_doc)[n]
-    extencao = os.path.splitext(selecionado)[1]
-    selecionado_nom = os.path.splitext(selecionado)[0]
+    print(selecionado)
+    pdf_pasta = local_doc + "\\" + selecionado
+    print(pdf_pasta)
 
-    imagem = Image.open(local_doc + "\\" + selecionado)
-    img = imagem.convert('RGB')
-    img.save(local_doc + "\\" + selecionado_nom + ".pdf")
-    print(local_doc + "\\" + selecionado_nom + "_1" + ".pdf")
-    os.rename(local_doc + "\\" + selecionado_nom + ".pdf", destino + "\\" + selecionado_nom + ".pdf")
+    if selecionado.endswith('.msg'):
+        print('msg')
+        pass
+    elif selecionado == destino:
+        pass
+    else:
 
+        os.chdir(pdf_pasta)
+        pdf_sel = pdf_pasta + '\\' + selecionado + '.pdf'
+        print(pdf_sel)
+        os.rename(pdf_sel, destino + '\\' + selecionado + ".pdf")
+        print(destino + '\\' + selecionado)
     n += 1

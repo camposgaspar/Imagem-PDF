@@ -7,27 +7,19 @@ ignorar = {"MSG"}
 
 local_doc = input(r"Onde está o arquivo?")
 os.chdir(local_doc)
-destino = os.path.join(local_doc, "MSG")
 
-
-if "MSG" in os.listdir(local_doc):
-    pass
-else:
-    os.makedirs(destino)
-
-
-lista_docs = [x for x in os.listdir(local_doc) if x not in ignorar]
+lista_docs = os.listdir(local_doc)
 
 
 def numero_docs():
     x = int(len(lista_docs))
-    return x
+    y = x * 4
+    return y
 
 
 os.system("msg2pdf -d " + local_doc)
 
-
-for i in range(0, numero_docs()+10):
+for i in range(0, numero_docs()):
 
     os.chdir(local_doc)
     selecionado = os.listdir(local_doc)[n]
@@ -36,20 +28,20 @@ for i in range(0, numero_docs()+10):
     print(pdf_pasta)
 
     if selecionado.endswith('.msg'):
-        print('msg')
+        print('MSG')
         pass
-        
-    elif selecionado == destino:
-        pass
-        
-    else:
 
+    elif selecionado.endswith('.pdf'):
+        print('PDF')
+        pass
+
+    else:
         os.chdir(pdf_pasta)
         pdf_sel = pdf_pasta + '\\' + selecionado + '.pdf'
         print(pdf_sel)
-        os.rename(pdf_sel, destino + '\\' + selecionado + ".pdf")
-        print(destino + '\\' + selecionado)
-        
+        os.rename(pdf_sel, local_doc + '\\' + selecionado + ".pdf")
+        print(local_doc + '\\' + selecionado)
+
     n += 1
 
 ## IMPLEMENTAR Excluir pasta vazia

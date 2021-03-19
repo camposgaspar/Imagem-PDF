@@ -44,6 +44,7 @@ for i in range(0, numero_docs()):
             print("Documento movido para: " + local_doc + '\\' + selecionado)
             print('')
         else:
+            print('Já estava presente')
             pass
 
     n += 1

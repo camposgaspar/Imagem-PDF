@@ -28,7 +28,7 @@ for i in range(0, numero_docs()):
     print(pdf_pasta)
 
     if selecionado.endswith('.msg'):
-        print('MSG')
+        print('msg')
         pass
 
     elif selecionado.endswith('.pdf'):
@@ -39,8 +39,12 @@ for i in range(0, numero_docs()):
         os.chdir(pdf_pasta)
         pdf_sel = pdf_pasta + '\\' + selecionado + '.pdf'
         print(pdf_sel)
-        os.rename(pdf_sel, local_doc + '\\' + selecionado + ".pdf")
-        print(local_doc + '\\' + selecionado)
+
+        if os.path.exists(pdf_sel):
+            os.rename(pdf_sel, local_doc + '\\' + selecionado + ".pdf")
+            print(local_doc + '\\' + selecionado)
+        else:
+            pass
 
     n += 1
 

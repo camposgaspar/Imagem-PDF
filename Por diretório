@@ -50,3 +50,5 @@ for i in range(0, numero_docs()+10):
         os.rename(pdf_sel, destino + '\\' + selecionado + ".pdf")
         print(destino + '\\' + selecionado)
     n += 1
+
+## IMPLEMENTAR Excluir pasta vazia

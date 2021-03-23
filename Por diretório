@@ -1,8 +1,15 @@
 import os
+import tkinter as tk
+from tkinter import filedialog
 
+root = tk.Tk()
+root.withdraw()
+
+print("Selecione a pasta: ")
+local_doc = filedialog.askdirectory()
 n = 0
 
-local_doc = input(r"Onde está o arquivo?")
+# local_doc = input(r"Onde está o arquivo?")
 os.chdir(local_doc)
 
 lista_docs = os.listdir(local_doc)

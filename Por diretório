@@ -7,9 +7,9 @@ root.withdraw()
 
 print("Selecione a pasta: ")
 local_doc = filedialog.askdirectory()
+print(local_doc)
 n = 0
 
-# local_doc = input(r"Onde está o arquivo?")
 os.chdir(local_doc)
 
 lista_docs = os.listdir(local_doc)
@@ -17,19 +17,23 @@ lista_docs = os.listdir(local_doc)
 
 def numero_docs():
     x = int(len(lista_docs))
-    y = x * 4
+    y = x * 6
     return y
 
 
 os.system("msg2pdf -d " + local_doc)
 
 for i in range(0, numero_docs()):
+    print(n)
 
     os.chdir(local_doc)
+    print(local_doc)
+    print("TRABALHANDO EM: " + os.getcwd())
     selecionado = os.listdir(local_doc)[n]
     print("Documento selecionado: " + selecionado)
-    pdf_pasta = local_doc + "\\" + selecionado
+    pdf_pasta = local_doc + "/" + selecionado
     print("Pasta do documento: " + pdf_pasta)
+
 
     if selecionado.endswith('.msg'):
         print('Documento .MSG original.')
@@ -42,19 +46,28 @@ for i in range(0, numero_docs()):
         pass
 
     else:
-        os.chdir(pdf_pasta)
-        pdf_sel = pdf_pasta + '\\' + selecionado + '.pdf'
-        print("Documento: " + pdf_sel)
 
-        if os.path.exists(pdf_sel):
-            os.rename(pdf_sel, local_doc + '\\' + selecionado + ".pdf")
-            print("Documento movido para: " + local_doc + '\\' + selecionado)
-            print('')
-        else:
-            print('Já estava presente')
+        os.chdir(pdf_pasta)
+        print("TRABALHANDO EM: " + os.getcwd())
+        documentos = str(os.listdir(pdf_pasta))
+        print('documentos:' + documentos)
+        documento = documentos.replace('[', '')
+        documento = documento.replace(']', '')
+        documento = documento.replace("'", '')
+        documento = documento.replace("'", '')
+        print('documento em pdf na pasta: ' + documento)
+
+        if os.path.exists(local_doc + documento):
+            print('Já estava presente: ' + local_doc + documento)
             print('')
             pass
 
+        else:
+            pdf_sel = pdf_pasta + '/' + documento
+            print("Documento: " + pdf_sel)
+            os.rename(pdf_sel, local_doc + '/' + documento)
+            print("Documento movido para: " + local_doc)
+            print('')
     n += 1
 
 ## IMPLEMENTAR Excluir pasta vazia
